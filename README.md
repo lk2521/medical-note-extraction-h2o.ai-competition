@@ -13,6 +13,12 @@ Key highlights of our solution include:
 
 ---
 
+## 🔗 **Kaggle Competition & Dataset**  
+You can find the competition details and dataset on Kaggle:  
+[**Medical Note Extraction | H2O GenAI World NY**](https://www.kaggle.com/competitions/medical-note-extraction-h-2-o-gen-ai-world-ny)  
+
+---
+
 ## 🛠️ **Technologies & Tools Used**  
 - **Python**: Core programming language for the solution.  
 - **Regex & Pattern Matching**: For parsing and extracting key information from free-text data.  
