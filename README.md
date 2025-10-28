@@ -10,7 +10,7 @@ Unstructured medical notes are a major challenge in healthcare, making systemati
 
 The evaluation was based on a custom metric that checked for valid JSON parsing and then calculated similarity for different data types (numerical, string, list/set, dictionaries) against the ground truth.
 
-## My Approach
+## Our Approach
 
 The core of this solution is an LLM-based extraction pipeline built with LangChain, using a powerful open-source model with 4-bit quantization and a meticulously crafted prompt.
 
