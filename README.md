@@ -1,8 +1,8 @@
 # Medical Note Extraction - H2O.ai Competition (1st Place Solution)
 
-This repository contains the 1st place solution for the [H2O.ai Competition: Medical Note Extraction](https://www.kaggle.com/competitions/h2o-llm-medical-note-extraction). The goal was to transform unstructured, synthetically generated medical notes into a structured JSON format.
+This repository contains the 1st place solution for the [H2O.ai Competition: Medical Note Extraction](https://www.kaggle.com/competitions/medical-note-extraction-h-2-o-gen-ai-world-ny). The goal was to transform unstructured, synthetically generated medical notes into a structured JSON format.
 
-This solution achieved a score of **0.98982** on the private leaderboard.
+This solution achieved a score of **0.99031** on the private leaderboard.
 
 ## Competition Overview
 
@@ -110,3 +110,10 @@ The `submission_builder.py` script handles the final steps to create a competiti
 * **Pydantic:** For robust schema definition and validation.
 * **HuggingFace `transformers`:** For the `HuggingFacePipeline`.
 * **`bitsandbytes`:** For 4-bit model quantization.
+
+## **Team Members**  
+This solution is a result of our collaborative efforts:  
+- **Lavesh Kadam**  
+- **Mannan Thakur**  
+- **Rushikesh Khandetod**  
+- **Archisman Bera**  
