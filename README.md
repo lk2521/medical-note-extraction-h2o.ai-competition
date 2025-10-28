@@ -1,35 +1,46 @@
-# 🏆 **1st Place Solution - Medical Note Extraction | H2O GenAI World NY**  
+# README.md
 
-Welcome to the repository for our **1st place solution** in the **"Medical Note Extraction H2O GenAI World NY"** competition organized by **H2O.ai**. In this competition, we tackled the challenge of extracting structured data from unstructured medical notes, achieving a private leaderboard score of **0.99031**!  
+# Medical Note Extraction to JSON
+Transforms brief medical notes into a strict JSON schema for competition submission, emphasizing parseability and type-correct outputs for reliable scoring. [web:25]
 
----
+## Overview
+Unstructured clinical notes are standardized into structured JSON to enable analytics and evaluation with the competition’s custom JSON-based scorer. [web:24]
 
-## 🚀 **Project Overview**  
+## Data and Output
+- Input: CSV with a Note column per row containing the clinical note text to be extracted. [web:24]
+- Output: Submission CSV with columns [ID, json], where json is a single serialized JSON object per row. [file:21]
 
-This project focuses on converting unstructured free-text medical notes into structured JSON format to improve data accessibility and usability.  
-Key highlights of our solution include:  
-- Efficiently extracting critical patient details like **symptoms**, **vital signs**, and **visit motivations** using **regex** and **pattern-matching** techniques.  
-- Optimizing data accuracy to meet custom **JSON-based evaluation metrics**.  
+## Evaluation (summary)
+The scorer first checks that json parses, then applies type-aware similarity across nested structures, so valid, type-correct, and schema-consistent JSON is essential. [web:24]
 
----
+## Method
+- Minimal text cleanup, then a strict prompt with few-shot examples and format instructions to elicit a single JSON object. [web:24]
+- Typed schema via Pydantic models with explicit field types and enumerations aligned to train-derived vocabularies. [web:24]
+- Post-processing validates JSON, removes nulls recursively, and normalizes values before writing the final submission. [file:21]
 
-## 🔗 **Kaggle Competition & Dataset**  
-You can find the competition details and dataset on Kaggle:  
-[**Medical Note Extraction | H2O GenAI World NY**](https://www.kaggle.com/competitions/medical-note-extraction-h-2-o-gen-ai-world-ny)  
+## Project structure
+medical_note_extraction/
+├─ config.py # Paths and environment setup
+├─ schema_and_prompt.py # Pydantic schema, parser, examples, prompt
+├─ model_chain.py # HF pipeline + LangChain runnables
+├─ run.py # Inference over test.csv to part/full outputs
+├─ submission_builder.py # Consolidation, validation, cleaning, submission
+└─ requirements.txt # Dependencies
 
----
+[web:25]
 
-## 🛠️ **Technologies & Tools Used**  
-- **Python**: Core programming language for the solution.  
-- **Regex & Pattern Matching**: For parsing and extracting key information from free-text data.  
-- **Data Cleaning Techniques**: To ensure consistency and accuracy in the output.  
-- **JSON**: For structuring and formatting extracted data.  
+## Setup
+- Create a virtual environment and install dependencies: pip install -r requirements.txt. [web:25]
+- Set train/test CSV paths in config.py or align files to the defaults used by the scripts. [web:25]
 
----
+## Run
+- Extraction: python run.py to generate per-part or full outputs with json and full_response columns. [web:24]
+- Build submission: python submission_builder.py to validate/clean and write /kaggle/working/submission.csv as [ID, json]. [file:21]
 
-## 🏅 **Team Members**  
-This solution is a result of our collaborative efforts:  
-- **Lavesh Kadam**  
-- **Mannan Thakur**  
-- **Rushikesh Khandetod**  
-- **Archisman Bera**  
+## Post-processing details
+- Consolidates part files, verifies json is a dict, and attempts recovery from full_response when needed. [file:21]
+- Removes nulls recursively and applies mapping-based normalization for controlled vocabularies. [file:21]
+
+## Notes and tips
+- Some generations may repeat “Assistant:” blocks; recovery uses a consistent split index to isolate the final JSON segment. [file:21]
+- Splitting test rows into parts and merging later improves wall-time without changing extraction logic. [file:21]

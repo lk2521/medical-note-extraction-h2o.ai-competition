@@ -1,0 +1,10 @@
+python-dotenv
+pandas
+numpy
+torch
+transformers
+bitsandbytes
+langchain-core
+langchain-huggingface
+tqdm
+pydantic
